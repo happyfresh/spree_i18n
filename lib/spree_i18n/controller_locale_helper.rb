@@ -5,8 +5,8 @@ module SpreeI18n
   module ControllerLocaleHelper
     extend ActiveSupport::Concern
     included do
-      before_filter :set_user_language
-      before_filter :globalize_fallbacks
+      before_action :set_user_language
+      before_action :globalize_fallbacks
 
       private
         # Overrides the Spree::Core::ControllerHelpers::Common logic so that only
