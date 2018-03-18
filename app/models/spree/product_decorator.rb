@@ -1,7 +1,12 @@
 module Spree
   Product.class_eval do
     translates :name, :description, :meta_description, :meta_keywords,
-      fallbacks_for_empty_translations: true
+               fallbacks_for_empty_translations: true
+
+    attribute :name
+    attribute :description
+    attribute :meta_description
+    attribute :meta_keywords
 
     include SpreeI18n::Translatable
 
