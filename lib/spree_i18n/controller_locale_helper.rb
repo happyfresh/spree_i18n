@@ -4,27 +4,26 @@ module SpreeI18n
   # MetalController instead of Spree::BaseController
   module ControllerLocaleHelper
     extend ActiveSupport::Concern
+
     included do
-      before_action :set_user_language
-      before_action :globalize_fallbacks
+      prepend_before_action :set_user_language
 
       private
-        # Overrides the Spree::Core::ControllerHelpers::Common logic so that only
-        # supported locales defined by SpreeI18n::Config.supported_locales can
-        # actually be set
-        def set_user_language
-          I18n.locale = if session.key?(:locale) && Config.supported_locales.include?(session[:locale].to_sym)
-            session[:locale]
+
+      # Overrides the Spree::Core::ControllerHelpers::Common logic so that only
+      # supported locales defined by SpreeI18n::Config.supported_locales can
+      # actually be set
+      def set_user_language
+        # params[:locale] can be added by routing-filter gem
+        I18n.locale = \
+          if params[:locale] && Config.available_locales.include?(params[:locale].to_sym)
+            params[:locale]
           elsif respond_to?(:config_locale, true) && !config_locale.blank?
             config_locale
           else
             Rails.application.config.i18n.default_locale || I18n.default_locale
           end
-        end
-
-        def globalize_fallbacks
-          Fallbacks.config!
-        end
+      end
     end
   end
 end
