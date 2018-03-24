@@ -16,7 +16,9 @@ module SpreeI18n
       def set_user_language
         # params[:locale] can be added by routing-filter gem
         I18n.locale = \
-          if params[:locale] && Config.available_locales.include?(params[:locale].to_sym)
+          if request.headers['Locale'] && Config.available_locales.include?(request.headers['Locale'].downcase.to_sym)
+            request.headers['Locale'].downcase
+          elsif params[:locale] && Config.available_locales.include?(params[:locale].to_sym)
             params[:locale]
           elsif respond_to?(:config_locale, true) && !config_locale.blank?
             config_locale
