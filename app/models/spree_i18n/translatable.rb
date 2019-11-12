@@ -6,7 +6,7 @@ module SpreeI18n
 
     included do |klass|
       accepts_nested_attributes_for :translations
-      klass.whitelisted_ransackable_associations |= ['translations']
+      # klass.whitelisted_ransackable_associations |= ['translations']
     end
 
     class_methods do

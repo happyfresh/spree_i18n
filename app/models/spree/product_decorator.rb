@@ -1,15 +1,15 @@
 module Spree
   Product.class_eval do
-    translates :name, :description, :meta_description, :meta_keywords, :slug,
+    translates :name, :description, :meta_description, :meta_keywords, #:slug,
       fallbacks_for_empty_translations: true
 
-    friendly_id :slug_candidates, use: [:history, :globalize]
+    # friendly_id :slug_candidates, use: [:history, :globalize]
 
     include SpreeI18n::Translatable
 
     translation_class.class_eval do
       # Paranoia soft-deletes the associated records only if they are paranoid themselves.
-      acts_as_paranoid
+      # acts_as_paranoid
 
       # Paranoid sets the default scope and Globalize rewrites all query methods.
       # Therefore we prefer to unset the default_scopes over injecting 'unscope'
