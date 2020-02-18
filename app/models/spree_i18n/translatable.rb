@@ -8,6 +8,7 @@ module SpreeI18n
 
     class_methods do
       def ransack(params = {}, options = {})
+        params = params&.deep_dup
         params ||= {}
         names = params.keys
 
