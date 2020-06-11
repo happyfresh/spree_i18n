@@ -16,9 +16,9 @@
           <div class="panel-body">
             <% field_type = @resource.class.translation_class.columns_hash[attr.to_s].type %>
             <% if field_type == :text %>
-              <%= g.text_area attr, class: 'form-control', rows: 4 %>
+              <%= g.text_area attr, class: 'form-control', rows: 4, disabled: 'true' %>
             <% else %>
-              <%= g.text_field attr, class: 'form-control' %>
+              <%= g.text_field attr, class: 'form-control', disabled: 'true' %>
             <% end %>
           </div>
         </div>

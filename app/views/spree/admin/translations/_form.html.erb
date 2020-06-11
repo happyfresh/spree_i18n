@@ -7,7 +7,11 @@
   <div class="col-md-8">
     <%= form_for [:admin, @resource] do |f| %>
       <%= render 'form_fields', f: f %>
+<%
+=begin %>
       <%= render 'spree/admin/shared/edit_resource_links' %>
+<%
+=end %>
     <% end %>
   </div>
 </div>
